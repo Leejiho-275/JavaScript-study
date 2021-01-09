@@ -9,16 +9,18 @@
    누적된 정답 횟수와 오답횟수를 출력하세요.
 */
 
-var input, res, yes, no, temp, quiz;
+var input, res, temp;
 
-yes = 0;
-no = 0;
+var yes = 0;
+var no = 0;
 
 while (true) {
     var randomInt1 = Math.floor(Math.random() * 100) + 1;
     var randomInt2 = Math.floor(Math.random() * 100) + 1;
-    var randomInt3 = Math.floor(Math.random() * 1) + 1;
-    if (randomInt3 === 1) {
+
+    // +, - 선정
+    var randomInt3 = Math.random();
+    if (randomInt3 >= 0.5) {
         temp = '+';
         res = randomInt1 + randomInt2;
     } else {
