@@ -28,13 +28,13 @@ while (true) {
         res = randomInt1 - randomInt2;
     }
 
-
     input = +prompt(`${randomInt1} ${temp} ${randomInt2} = ??`);
     if (input === res) {
         alert('정답입니다.');
         yes++;
     } else if (input === 0) {
         alert(`정답 횟수 : ${yes}, 오답 횟수 : ${no}`);
+        break;
     } else {
         alert('오답입니다.');
         no++;
