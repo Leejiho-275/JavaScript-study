@@ -15,9 +15,13 @@ var scores = [20, 30, 40, 50, 60, 70, 80, 90];
 var total = 0, avg = 0;
 
 scores[scores.length] = 100;
-
+/*
 for (var i = 0; i < scores.length; i++) {
     total += scores[i];
+}
+*/
+for (var num of scores) {
+   total += num;
 }
 avg = total / scores.length;
 // 소수점 길이 제한
