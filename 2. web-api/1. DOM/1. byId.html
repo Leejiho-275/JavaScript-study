@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>byId</title>
+</head>
+
+<body>
+
+    <ul>
+        <li id="apple">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="grape">Grape</li>
+        <li id="apple">Pineapple</li>
+    </ul>
+
+    <script>
+        // console.log(document.body.ul);
+
+        // 관례적으로 노드의 변수이름 앞에 $를 붙입니다.
+        const $apple = document.getElementById('apple');
+        console.log($apple);
+
+        $apple.style.fontSize = '40px';
+        document.body.style.background = 'tomato';
+
+        // 없는 아이디를 사용하면? null을 반환
+        const $elem = document.getElementById('peach');
+        console.log($elem);
+
+        // 요소에 id부여시 id 이름으로 자동으로 전역변수가 생성됨.
+        // const banana=document.getElementById('banana');
+        banana.style.color = 'yellow';
+
+// 동일 이름으로 사용자가 변수 선언 시 자동으로 전역변수는 취소됨.
+        const grape = "포도포도";
+        grape.style.color = 'violet';
+    </script>
+
+</body>
+
+</html>
