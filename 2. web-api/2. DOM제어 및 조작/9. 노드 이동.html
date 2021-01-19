@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드 삽입</title>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Grape</li>
+    </ul>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+        const children = $fruits.children;
+        /*
+                const $apple = children[0];
+                const $banana = children[1];
+                const $grape = children[2];
+        */
+        // 배열 디스트럭쳐링
+        const [$apple, $banana, $grape] = [...children];
+
+        const $mango = document.createElement('li');
+        $mango.textContent = "Mango";
+
+        $fruits.appendChild($mango);
+
+        $fruits.appendChild($banana);
+        $fruits.insertBefore($apple, $mango);
+
+        // const $last = $fruits.lastElementChild;
+        $fruits.insertBefore($grape, $fruits.lastElementChild);
+    </script>
+
+</body>
+
+</html>

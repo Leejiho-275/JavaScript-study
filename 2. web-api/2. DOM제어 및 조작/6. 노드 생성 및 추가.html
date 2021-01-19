@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드 생성 및 추가</title>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li>Apple</li>
+    </ul>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+
+        // 1. 요소 노드 생성
+        const $li = document.createElement('li');
+
+        // 2. 텍스트 노드 생성
+        // const $text=document.createTextNode('Mango');
+
+        // 3. 요소 노드와 텍스트 노드를 결합
+        // $li.appendChild($text);
+        $li.textContent = 'Mango';
+
+        // 4. li를 ul의 자식노드로 추가
+        $fruits.appendChild($li);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드 삽입</title>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Grape</li>
+    </ul>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+
+        const $li = document.createElement('li');
+        $li.textContent = 'Mango';
+
+        // $fruits.insertBefore($li, $fruits.lastElementChild);
+        const $banana = $fruits.querySelector('li:last-child');
+        $fruits.insertBefore($li, $banana);
+    </script>
+
+</body>
+
+</html>

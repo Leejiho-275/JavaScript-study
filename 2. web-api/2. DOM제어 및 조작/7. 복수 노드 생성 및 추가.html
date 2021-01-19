@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>복수 노드 생성 및 추가</title>
+</head>
+
+<body>
+
+    <ul id="fruits"></ul>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+
+        // 과일 이름 텍스트 배열
+        const fruitNames = ['Apple', 'Banana', 'Grape', 'Orange'];
+
+        /*
+        #아래 방법의 문제점
+        - 아래 방법은 이미 렌더링되어서 활성화된 DOM에
+        반복해서 노드를 추가하므로 메모리상 높은 비용이 발생함.
+        활성화된 DOM을 변경 조작하는 것은 가능한 한 횟수를 줄여야
+        성능상 유리
+        */
+        /*
+                for (let f of fruitNames) {
+                    const $li = document.createElement('li');
+                    $li.textContent = f;
+                    $fruits.appendChild($li);
+                }
+                */
+
+        // 가상의 DOM 생성
+        // DocumentFragment - 진정한 Virtual DOM
+        const $fragment = document.createDocumentFragment();
+
+        // const $div = document.createElement('div');
+        for (let f of fruitNames) {
+            const $li = document.createElement('li');
+            $li.textContent = f;
+            $fragment.appendChild($li);
+        }
+        $fruits.appendChild($fragment);
+    </script>
+
+</body>
+
+</html>
