@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>set,getAttribute</title>
+</head>
+
+<body>
+
+    <input type="text" id="name" value="Lee">
+
+    <script>
+        const $input = document.querySelector('input');
+
+        // input의 value속성 값을 얻고싶다
+        // const inputValue = $input.attributes.value.value;
+        const inputValue = $input.getAttribute('value');
+        console.log(inputValue);
+        console.log($input.getAttribute('id'));
+
+        // 속성 value의 값을 변경
+        // $input.attributes.value.value = 'Kim';
+        $input.setAttribute('value', 'Kim');
+
+        // 속성 title 속성을 추가
+        $input.setAttribute('title', '입력창');
+
+        // 속성 value를 삭제
+        $input.removeAttribute('value');
+
+        // 속성이 있는지 확인
+        console.log($input.hasAttribute('id'));
+        console.log($input.hasAttribute('value'));
+    </script>
+
+</body>
+
+</html>

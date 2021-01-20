@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드복사</title>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li>Apple</li>
+    </ul>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+
+        // li - apple 원본 요소 취득
+        const $apple = $fruits.firstElementChild;
+
+        // apple의 사본 생성 (얕은 복사 : 자기 자신의 노드만 복사)
+        // const $shallowClone = $apple.cloneNode();
+        const $shallowClone = $apple.cloneNode(false);
+        console.log($shallowClone);
+
+        $shallowClone.textContent = 'Banana';
+
+        $fruits.appendChild($shallowClone);
+
+        // appledml 사본 생성(깊은 복사: 자기 자신을 포함 모든 자손제드까지 복제)
+        const $deepClone = $apple.cloneNode(true);
+        $fruits.appendChild($deepClone);
+
+        $deepClone.textContent = 'Mango';
+
+        // ul을 깊은 복사
+        const $ulClone = $fruits.cloneNode(true);
+        $fruits.appendChild($ulClone);
+    </script>
+
+</body>
+
+</html>

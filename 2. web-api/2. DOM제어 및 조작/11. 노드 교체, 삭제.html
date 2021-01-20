@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드 교체, 삭제</title>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li>Apple</li>
+        <li>Banana</li>
+    </ul>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+
+        // Apple 노드를 Mango 노드로 교체
+        const $mango = document.createElement('li');
+        $mango.textContent = 'Mango';
+
+        $fruits.replaceChild($mango, $fruits.firstElementChild);
+
+        // 맨 마지막 노드인 Banana를 삭제
+        $fruits.removeChild($fruits.lastElementChild);
+    </script>
+
+</body>
+
+</html>

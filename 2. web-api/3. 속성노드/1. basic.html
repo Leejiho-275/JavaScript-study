@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basic</title>
+</head>
+
+<body>
+
+    <input type="text" id="name" value="Lee">
+
+    <script>
+        const $input = document.querySelector('input');
+
+        console.log($input.attributes);
+        console.log($input.attributes.id.value);
+        console.log($input.attributes.value.value);
+        console.log($input.attributes.type.value);
+
+        $input.attributes.value.value = '고길동';
+        // $input.attributes.type.value = 'checkbox';
+    </script>
+
+</body>
+
+</html>

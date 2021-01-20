@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data-attr</title>
+</head>
+
+<body>
+
+    <ul class="users">
+        <li id="1" data-user-id="kim1234" data-role="common">Kim</li>
+        <li id="2" data-user-id="hong4321" data-role="admin">Hong</li>
+    </ul>
+
+    <script>
+        const $users = document.querySelector('.users');
+
+        // 배열 디스트럭쳐링 (구조 분해 할당)
+        const [$user1, $user2] = [...$users.children];
+
+        /*
+        const $userLi = $users.children;
+        const userArray = [...$userLi];
+        const $user1 = userArray[0];
+        const $user2 = userArray[1];
+        */
+
+        console.log($user1.getAttribute('id'));
+        console.log($user1.getAttribute('data-user-id'));
+
+        // dataset 프로퍼티 활용
+        console.log($user1.dataset);
+        console.log($user1.dataset.userId);
+        console.log($user1.dataset.role);
+
+        $user2.dataset.userName = '홍길동';
+
+        delete $user2.dataset.userId;
+    </script>
+
+</body>
+
+</html>
