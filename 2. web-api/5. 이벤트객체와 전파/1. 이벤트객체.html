@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트객체</title>
+</head>
+
+<body>
+
+    <p>아무 곳이나 클릭해주세요</p>
+    <em class="message"></em>
+
+    <script>
+        const $msg = document.querySelector('.message');
+
+        document.addEventListener('click', function (event) {
+            console.log(event);
+            console.log(event.type);
+            console.log(event.target);
+            $msg.textContent = `x : ${event.clientX}, y : ${event.clientY}`;
+        });
+    </script>
+
+</body>
+
+</html>

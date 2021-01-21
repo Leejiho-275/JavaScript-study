@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키보드 이벤트</title>
+</head>
+
+<body>
+
+    <input type="text">
+    <p class="msg"></p>
+
+    <script>
+        const $input = document.querySelector('input');
+        const $msg = document.querySelector('.msg');
+
+        $input.addEventListener('keyup', function (e) {
+            // e.key는 입력한 키값을 문자열로 반환
+            // console.log(e.key);
+
+            if (e.key !== 'Enter') return;
+            else {
+                $msg.textContent = e.target.value;
+                e.target.value = '';
+            }
+        })
+    </script>
+
+</body>
+
+</html>
