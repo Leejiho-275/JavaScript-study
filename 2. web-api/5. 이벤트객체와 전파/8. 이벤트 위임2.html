@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 위임2</title>
+    <style>
+        #fruits {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+
+        #fruits li {
+            width: 100px;
+            cursor: pointer;
+        }
+
+        #fruits .active {
+            color: red;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li id="apple" class="active">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="grape">Grape</li>
+    </ul>
+
+    <div>선택된 과일 : <em class="msg">apple</em></div>
+
+    <br>
+
+    # 새로운 과일 추가 : <input type="text" class="text-box"><button id="add">추가</button><button id="del">삭제</button>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+        const $msg = document.querySelector('.msg');
+
+        // 이벤트 함수
+        function activate(e) {
+            for (let $target of [...$fruits.children]) {
+                /*
+                toggle의 두번째 인수의 논리값이 true로 판명나면
+                지정한 클래스를 추가하고 false로 판명나면
+                지정한 클래스를 제거
+                */
+                $target.classList.toggle('active', $target === e.target)
+                $msg.textContent = e.target.id;
+            }
+        }
+
+        // 부모요소 ul에 이벤트 핸들러 activate를 단 1번만 등록
+        $fruits.addEventListener('click', activate);
+
+        // 동적으로 과일 추가 기능
+        const $text = document.querySelector('.text-box');
+        const $addBtn = document.querySelector('#add');
+        const $delBtn = document.querySelector('#del');
+
+        $addBtn.addEventListener('click', function (e) {
+            const $newLi = document.createElement('li');
+            $newLi.textContent = $text.value;
+            $newLi.setAttribute('id', $text.value);
+
+            $fruits.appendChild($newLi);
+            $text.value = '';
+            addHandler();
+        })
+    </script>
+
+</body>
+
+</html>

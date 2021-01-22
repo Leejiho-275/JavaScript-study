@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 전파2</title>
+    <style>
+        .root {
+            /* position: absolute; */
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+
+        .parent {
+            /* position: absolute; */
+            width: 200px;
+            height: 200px;
+            background-color: green;
+        }
+
+        .child {
+            /* position: absolute; */
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+
+        .target {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="root">
+        <div class="parent">
+            <div class="child">
+                <div class="target">Target</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // useCapture : 캡쳐링을 사용할 것인지 유무
+        // stop : 버블링을 중단시킬 것인지 여부
+        function bubblingAndCapturing(useCapture, stop) {
+            document.querySelector('body').addEventListener('click', function () {
+                alert("body");
+            }, useCapture)
+
+            document.querySelector('.root').addEventListener('click', function () {
+                alert("root");
+            }, useCapture)
+
+            document.querySelector('.parent').addEventListener('click', function () {
+                alert("parent");
+            }, useCapture)
+
+            document.querySelector('.child').addEventListener('click', function () {
+                alert("child");
+            }, useCapture)
+
+            document.querySelector('.target').addEventListener('click', function (e) {
+                alert("target");
+                if (stop) {
+                    e.stopPropagation();
+                }
+            }, useCapture)
+        }
+
+        // bubblingAndCapturing();
+        // bubblingAndCapturing(true);
+        bubblingAndCapturing(false, true);
+    </script>
+</body>
+
+</html>
