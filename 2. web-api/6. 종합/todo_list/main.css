@@ -37,11 +37,16 @@ section.todo-template .app-title {
     align-items: center;
 }
 
-section.todo-template .content {}
+section.todo-template .content {
+    background: #fff;
+}
 
 section.todo-template .content .todo-insert {
     display: flex;
     background: #495057;
+}
+section.todo-template .content .todo-insert.error {
+    background: red;
 }
 
 section.todo-template .content .todo-insert input {
@@ -98,9 +103,24 @@ section.todo-template .content .todo-list .todo-list-item .checkbox input {
     transform: scale(1.5);
 }
 
-section.todo-template .content .todo-list .todo-list-item .checkbox .text{
+section.todo-template .content .todo-list .todo-list-item .checkbox .text {
     margin-left: 0.5rem;
     flex: 1;
+}
+
+section.todo-template .content .todo-list .todo-list-item .checkbox.checked .text {
+    color: #adb5bd;
+    text-decoration: line-through;
+}
+
+/* 수정 이벤트 */
+section.todo-template .content .todo-list .todo-list-item .revise {
+    display: flex;
+    padding-right: 10px;
+    align-items: center;
+    font-size: 1.5rem;
+    color: gray;
+    cursor: pointer;
 }
 
 section.todo-template .content .todo-list .todo-list-item .remove {
