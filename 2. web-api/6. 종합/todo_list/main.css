@@ -114,7 +114,7 @@ section.todo-template .content .todo-list .todo-list-item .checkbox.checked .tex
 }
 
 /* 수정 이벤트 */
-section.todo-template .content .todo-list .todo-list-item .revise {
+section.todo-template .content .todo-list .todo-list-item .modify {
     display: flex;
     padding-right: 10px;
     align-items: center;

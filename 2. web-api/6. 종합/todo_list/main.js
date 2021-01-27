@@ -25,7 +25,7 @@ function makeNewToDoNode(newToDo) {
     <span class="text">${newToDo.text}</span>`;
 
     // div 태그 작업 - 수정
-    $div1.classList.add('revise');
+    $div1.classList.add('modify');
     $div1.innerHTML = '<span class="lnr lnr-undo"></span>'
 
     // div 태그 작업 - 삭제
@@ -117,9 +117,9 @@ function removeToDoData($delSpan) {
     }
 }
 // 수정 이벤트
-function reviseToDoData($reviseSpan) {
-    const $reviseLi = $reviseSpan.parentElement.parentElement;
-    console.log($reviseLi);
+function modifyToDoData($modifySpan) {
+    const $modifyLi = $modifySpan.parentElement.parentElement;
+    console.log($modifyLi);
 }
 
 // 메인 실행 함수
@@ -154,9 +154,9 @@ function reviseToDoData($reviseSpan) {
 
     // 할 일 수정 이벤트
     $todoList.addEventListener('click', function (e) {
-        if (!e.target.matches('.todo-list div.revise span')) {
+        if (!e.target.matches('.todo-list div.modify span')) {
             return;
         }
-        reviseToDoData(e.target);
+        modifyToDoData(e.target);
     })
 }());
