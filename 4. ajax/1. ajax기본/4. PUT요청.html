@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUT요청</title>
+</head>
+
+<body>
+
+    <script>
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', 'http://localhost:5000/posts/2')
+
+        // PUT요청의 경우에도 서버로 전송할 데이터가 필요함
+        // 수정시 사용하는 PUT요청은 모든 데이터를 넣어줘야 정상 작동함
+        const modData = {
+            title: '수정된 제목',
+            author:'둘리',
+            id: 2
+        };
+        // 텍스트 : text/plain
+        xhr.setRequestHeader('content-type', 'application/json');
+
+        // 서버에 전송
+        xhr.send(JSON.stringify(modData));
+        xhr.onload = () => {
+            if (xhr.status === 200) {
+                alert('modify success');
+            } else {
+                alert('modify fail');
+            }
+        };
+    </script>
+
+</body>
+
+</html>

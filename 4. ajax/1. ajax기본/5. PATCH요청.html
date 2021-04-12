@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATCH요청</title>
+</head>
+
+<body>
+
+    <script>
+        const xhr = new XMLHttpRequest();
+        xhr.open('PATCH', 'http://localhost:5000/posts/a')
+
+        // PATCH요청의 경우에도 서버로 전송할 데이터가 필요함
+        // 수정시 사용하는 PATCH요청은 부분데이터 변경이 가능함
+        const modData = {
+            author: '둘리',
+        };
+        // 텍스트 : text/plain
+        xhr.setRequestHeader('content-type', 'application/json');
+
+        // 서버에 전송
+        xhr.send(JSON.stringify(modData));
+        xhr.onload = () => {
+            if (xhr.status === 200) {
+                alert('modify success');
+            } else {
+                alert('modify fail');
+            }
+        };
+    </script>
+
+</body>
+
+</html>
