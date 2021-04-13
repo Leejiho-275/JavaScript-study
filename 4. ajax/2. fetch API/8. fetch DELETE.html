@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch POST</title>
+</head>
+
+<body>
+
+    <script>
+        // fetch DELETE 요청하기
+        // POST요청은 GET요청과 달리 서버로 전달해야할 데이터들이 있음
+        fetch('http://localhost:5000/posts/55', {
+                method: 'DELETE'
+            })
+            .then(res => {
+                if (res.status === '200') {
+                    console.log('del success');
+                } else {
+                    console.log('del fail');
+                }
+            });
+    </script>
+
+</body>
+
+</html>

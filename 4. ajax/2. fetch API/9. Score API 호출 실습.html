@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score API 호출 실습</title>
+</head>
+
+<body>
+
+    <div class="input">
+        <label># 이름: <input type="text" name="name"></label>
+        <label># 국어: <input type="text" name="kor"></label>
+        <label># 영어: <input type="text" name="math"></label>
+        <label># 수학: <input type="text" name="eng"></label>
+    </div>
+
+    <button id="get">GET</button>
+    <button id="post">POST</button>
+    <button id="delete">DELETE</button>
+
+    <hr>
+
+    <ul class="content"></ul>
+
+    <script>
+        function clearResultDOM() {
+            const $content = document.querySelector(".content");
+            for (let $li of [...$content.children]) {
+                $content.removeChild($li);
+            }
+        }
+
+        function makeScoreDOM(response) {
+
+            const $content = document.querySelector(".content");
+            const $fragment = document.createDocumentFragment();
+
+            for (let score of scoreList) {
+                const {
+                    stuNum,
+                    name,
+                    kor,
+                    eng,
+                    math,
+                    total,
+                    average
+                } = score;
+                const $li = document.createElement('li');
+                $li.textContent =
+                    `번호 : ${stuNum}, 이름 : ${name}, 국어 : ${kor}, 영어 : ${eng}, 수학 : ${math}, 총점 : ${total}, 평균 : ${average}`;
+                $content.appendChild($li);
+            }
+            $content.appendChild($fragment);
+        }
+
+        // get 버튼
+        document.getElementById('get').addEventListener('click', e => {
+            clearResultDOM();
+            fetch('http://localhost/api/score/')
+                .then(get => get.json())
+                .then(score => {
+                    makeScoreDOM(score);
+                });
+        });
+
+        // post버튼
+        document.getElementById('post').addEventListener('click', e => {
+            const reqInfo = {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: document.querySelector('input[name=name]').value,
+                    kor: +document.querySelector('input[name=kor]').value,
+                    eng: +document.querySelector('input[name=eng]').value,
+                    math: +document.querySelector('input[name=math]').value
+                })
+            };
+            fetch('http://localhost/api/score/', reqInfo)
+                .then(res => {
+                    if (res.status === 'regSuccess') {
+                        console.log('insert success');
+                    } else {
+                        console.log('insert fail');
+                    }
+                });
+        });
+
+
+        document.getElementById('delete').addEventListener('click', e => {
+        fetch('http://localhost/api/score/{stuNum}', {
+                method: 'DELETE'
+            })
+            .then(res => {
+                if (res.status === 'delSuccess') {
+                    console.log('del success');
+                } else {
+                    console.log('del fail');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

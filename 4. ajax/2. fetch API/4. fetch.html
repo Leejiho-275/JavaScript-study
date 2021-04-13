@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch</title>
+</head>
+
+<body>
+
+    <script>
+        // fetch API : 자바스크립트에서 제공하는 비동기 통신 함수
+        // - Promis를 리턴하여 손쉽게 응답결과를 사용할 수 있게 해줌
+        const result = fetch('http://localhost:5000/posts');
+        // console.log(result);
+
+        // fetch가 리턴하는 프로미스는 단순한 응답데이터만이 아닌
+        // 응답데이터를 포함한 모든 정보를 담고 있습니다.
+        // 따라서 서버가 응답한 데이터를 얻기 위해 json()메서드를 호출합니다.
+        result.then(res => res.json())
+        .then(data => console.log(data));
+    </script>
+
+</body>
+
+</html>

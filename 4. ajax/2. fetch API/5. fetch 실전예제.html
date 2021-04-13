@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch 실전 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .movieList {
+            margin: 0 auto;
+            widows: 80%;
+            overflow: hidden;
+        }
+
+        .movieList .movie {
+            float: left;
+            width: 33.33333%;
+            height: 300px;
+            position: relative;
+        }
+
+        .movieList .movie img {
+            width: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .inner {
+            padding-left: 100px;
+        }
+
+        .inner .genres li {
+            display: inline-block;
+        }
+
+        .inner .summary {
+            overflow: scroll;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="movieList">
+        <!-- 
+        <div class="movie">
+            <img src="https://yts.mx/assets/images/movies/the_marksman_2021/background.jpg" alt="">
+            <div class="inner">
+                <div class="title">제목</div>
+                <div class="year">개봉일</div>
+                <ul class="genres">
+                    <li>comedy</li>
+                    <li>action</li>
+                </ul>
+                <p class="summary">fdsfdsfdsfds</p>
+            </div>
+        </div>
+         -->
+
+    </div>
+
+
+    <script>
+        // 영화 DOM을 만드는 함수
+        function makeMovieDOM(movieList) {
+            let tag = ''; // 태그문자열을 저장할 변수
+
+            for (let movie of movieList) {
+                const {
+                    medium_cover_image,
+                    year,
+                    title,
+                    summary,
+                    genres
+                } = movie;
+
+                tag += `<div class="movie">
+                    <img src="${medium_cover_image}" alt="영화이미지">
+                    <div class="inner">
+                        <div class="title">${title}</div>
+                        <div class="year">${year}년</div>
+                        <ul class="genres">`;
+                for (let genre of genres) {
+                    tag += `<li>${genre}</li>`;
+                }
+                tag += ` </ul>
+                      <p class = "summary" >${summary}</p>
+                    </div>
+                </div>
+            `;
+            } // end for
+
+            document.querySelector('.movieList').innerHTML = tag;
+        }
+
+        // 영화 API를 얻어올 서버 http://yts.mx/api
+        fetch('https://yts.mx/api/v2/list_movies.json?limit=30')
+            .then(res => res.json())
+            .then(movieData => {
+                // console.log(movieData);
+                // console.log(movieData.data.movies);
+
+                makeMovieDOM(movieData.data.movies);
+            })
+    </script>
+
+</body>
+
+</html>
