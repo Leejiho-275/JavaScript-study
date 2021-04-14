@@ -11,15 +11,14 @@
 <body>
 
     <div class="input">
-        <label># 이름: <input type="text" name="name"></label>
-        <label># 국어: <input type="text" name="kor"></label>
-        <label># 영어: <input type="text" name="math"></label>
-        <label># 수학: <input type="text" name="eng"></label>
+        <label># 이름: <input type="text" name="name"></label><br>
+        <label># 국어: <input type="text" name="kor"></label><br>
+        <label># 영어: <input type="text" name="math"></label><br>
+        <label># 수학: <input type="text" name="eng"></label><br>
     </div>
 
     <button id="get">GET</button>
     <button id="post">POST</button>
-    <button id="delete">DELETE</button>
 
     <hr>
 
@@ -33,7 +32,7 @@
             }
         }
 
-        function makeScoreDOM(response) {
+        function makeScoreDOM(scoreList) {
 
             const $content = document.querySelector(".content");
             const $fragment = document.createDocumentFragment();
@@ -49,8 +48,15 @@
                     average
                 } = score;
                 const $li = document.createElement('li');
+
+                // li태그에 data- 속성을 부여
+                $li.dataset.stuNum = stuNum;
+
                 $li.textContent =
                     `번호 : ${stuNum}, 이름 : ${name}, 국어 : ${kor}, 영어 : ${eng}, 수학 : ${math}, 총점 : ${total}, 평균 : ${average}`;
+
+                $li.innerHTML += '&nbsp;<button class="remove">삭제</button>';
+
                 $content.appendChild($li);
             }
             $content.appendChild($fragment);
@@ -60,48 +66,71 @@
         document.getElementById('get').addEventListener('click', e => {
             clearResultDOM();
             fetch('http://localhost/api/score/')
-                .then(get => get.json())
-                .then(score => {
-                    makeScoreDOM(score);
+                .then(res => res.json())
+                .then(scores => {
+                    makeScoreDOM(scores);
                 });
         });
 
-        // post버튼
+        //post버튼 이벤트
         document.getElementById('post').addEventListener('click', e => {
+
+            const $name = document.querySelector('input[name=name]');
+            const $kor = document.querySelector('input[name=kor]');
+            const $eng = document.querySelector('input[name=eng]');
+            const $math = document.querySelector('input[name=math]');
+
             const reqInfo = {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: document.querySelector('input[name=name]').value,
-                    kor: +document.querySelector('input[name=kor]').value,
-                    eng: +document.querySelector('input[name=eng]').value,
-                    math: +document.querySelector('input[name=math]').value
+                    name: $name.value,
+                    kor: +$kor.value,
+                    eng: +$eng.value,
+                    math: +$math.value
                 })
             };
+
             fetch('http://localhost/api/score/', reqInfo)
-                .then(res => {
-                    if (res.status === 'regSuccess') {
-                        console.log('insert success');
+                .then(res => res.text())
+                .then(result => {
+                    if (result === 'regSuccess') {
+                        alert('등록 성공!');
+                        $name.value = '';
+                        $kor.value = '';
+                        $eng.value = '';
+                        $math.value = '';
                     } else {
-                        console.log('insert fail');
+                        alert('등록 실패!');
                     }
                 });
         });
 
 
-        document.getElementById('delete').addEventListener('click', e => {
-        fetch('http://localhost/api/score/{stuNum}', {
-                method: 'DELETE'
-            })
-            .then(res => {
-                if (res.status === 'delSuccess') {
-                    console.log('del success');
-                } else {
-                    console.log('del fail');
-                }
-            });
+
+        document.querySelector('.content').addEventListener('click', e => {
+            if (!e.target.matches('.content > li > .remove')) {
+                return;
+            }
+
+            const $li = e.target.parentElement;
+            const stuNum = $li.dataset.stuNum;
+
+            console.log(stuNum);
+
+            fetch('http://localhost/api/score/' + stuNum, {
+                    method: 'DELETE'
+                })
+                .then(res => res.text())
+                .then(msg => {
+                    if (msg === 'delSuccess') {
+                        console.log('del success');
+                    } else {
+                        console.log('del fail');
+                    }
+                })
         });
     </script>
 
